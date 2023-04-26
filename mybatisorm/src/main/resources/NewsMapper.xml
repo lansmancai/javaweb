@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- MyBatis Mapper文件的DTD -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NewsMapper">
+	<!-- 用insert元素定义一条insert SQL语句，id指定了这条语句的名称 -->
+	<insert id="saveNews">
+		insert into news_inf values(null, #{title}, #{content})
+	</insert>
+	<!-- 用update元素定义一条update SQL语句，id指定了这条语句的名称 -->
+	<update id="updateNews">
+		update news_inf set news_title=#{title}, news_content=#{content}
+		where news_id=#{id}
+	</update>
+	<!-- 故意用insert元素定义一条delete SQL语句，
+		证明insert、delete、update元素功能几乎相同 -->
+	<insert id="deleteNews">
+		delete from news_inf
+		where news_id=#{abc}
+	</insert>
+	<!-- 使用select元素定义一条select SQL语句，
+		resultType指定每条记录映射成什么Java对象 -->
+	<select id="getNews" resultType="domain.News">
+		select news_id id, news_title title, news_content content
+		from news_inf where news_id = #{id}
+	</select>
+</mapper>
